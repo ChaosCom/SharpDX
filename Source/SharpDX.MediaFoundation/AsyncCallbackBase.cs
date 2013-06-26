@@ -1,4 +1,4 @@
-// Copyright (c) 2010-2013 SharpDX - Alexandre Mutel
+﻿// Copyright (c) 2010-2012 SharpDX - Alexandre Mutel
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -18,28 +18,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace SharpDocPak
+namespace SharpDX.MediaFoundation
 {
     /// <summary>
-    /// Type of commands.
+    /// A default implementation of AsyncCallbackBase.
     /// </summary>
-    public enum CommandType
+    public abstract class AsyncCallbackBase : CallbackBase, IAsyncCallback
     {
-        /// <summary>
-        /// Show command.
-        /// </summary>
-        Show = 0,
-        /// <summary>
-        /// Pak a documentation directory into an exe.
-        /// </summary>
-        Pak,
-        /// <summary>
-        /// Unpack a docpak exe to a directory.
-        /// </summary>
-        Unpak,
-        /// <summary>
-        /// List files inside a docpak exe.
-        /// </summary>
-        List        
+        public virtual AsyncCallbackFlags Flags
+        {
+            get { return AsyncCallbackFlags.None; }
+        }
+
+        public virtual WorkQueueId WorkQueueId
+        {
+            get { return WorkQueueId.Standard; }
+        }
+
+        public abstract void Invoke(AsyncResult asyncResult);
     }
 }
